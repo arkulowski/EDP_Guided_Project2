@@ -1,0 +1,25 @@
+{
+  "name": "edp_guided_project2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "start": "node --watch server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arkulowski/EDP_Guided_Project2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/arkulowski/EDP_Guided_Project2/issues"
+  },
+  "homepage": "https://github.com/arkulowski/EDP_Guided_Project2#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
+  }
+}
