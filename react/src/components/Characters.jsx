@@ -1,6 +1,5 @@
-import { useParams } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams} from "react-router-dom";
 
 const Character = () => {
     const { id } = useParams();
@@ -28,6 +27,10 @@ const Character = () => {
             .catch((error) => {
                 console.error('Error fetching films:', error);
             });
+    }
+
+    const fetchHomeworld = () => {
+        
     }
 
     const fetchCharacter = async () => {
