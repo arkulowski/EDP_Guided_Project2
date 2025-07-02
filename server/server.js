@@ -155,6 +155,31 @@ async function startServer() {
       }
     });
     
+    app.get('/api/characters/:id/planets', async (req, res) => {
+      try {
+        const characterId = parseInt(req.params.id);
+    
+        const character = await db.collection(process.env.MONGO_DB_COLLECTION_CHARACTERS)
+          .findOne({ id: characterId });
+    
+        if (!character) {
+          return res.status(404).json({ error: 'Character not found.' });
+        }
+    
+        const homeworld = await db.collection(process.env.MONGO_DB_COLLECTION_PLANETS)
+          .findOne({ id: character.homeworld });
+    
+        if (!homeworld) {
+          return res.status(404).json({ error: 'Homeworld not found.' });
+        }
+    
+        res.json(homeworld);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching the homeworld planet.' });
+      }
+    });
+    ;
     
 
 

@@ -29,6 +29,10 @@ const Character = () => {
             });
     }
 
+    const fetchHomeworld = () => {
+        
+    }
+
     const fetchCharacter = async () => {
         fetch(`http://localhost:3000/api/characters/${id}/`)
             .then((res) => {
