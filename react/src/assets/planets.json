@@ -1,0 +1,25 @@
+[
+    {
+      "id": 1,
+      "climate": "arid",
+      "surface_water": "1",
+      "name": "Tatooine",
+      "diameter": "10465",
+      "rotation_period": "23",
+      "terrain": "desert",
+      "gravity": "1 standard",
+      "orbital_period": "304",
+      "population": "200000"
+    },
+    {
+      "id": 2,
+      "climate": "temperate",
+      "surface_water": "40",
+      "name": "Alderaan",
+      "diameter": "12500",
+      "rotation_period": "24",
+      "terrain": "grasslands, mountains",
+      "gravity": "1 standard",
+      "orbital_period": "364",
+      "population": "2000000000"
+    }]

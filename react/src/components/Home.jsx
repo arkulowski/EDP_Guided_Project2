@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Link, useNavigate} from "react-
 const Home = (props) => {
     const navigate = useNavigate();
     const characters = props.characters;
-    const something = (char) => {
+    const navigateCharacter = (char) => {
         navigate(`/character/${char.id}`)   
     }
 
@@ -17,7 +17,7 @@ const Home = (props) => {
                     {
                         characters.map((char) => (
                             <li key={char.id}>
-                                <button onClick={() => something(char)} className="btn btn-primary">{char.name}</button>
+                                <button onClick={() => navigateCharacter(char)} className="btn btn-primary">{char.name}</button>
                             </li>
                         ))
                     }

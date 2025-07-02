@@ -1,13 +1,22 @@
+import { useParams } from 'react-router-dom';
+import films from '../assets/films.json' 
+
 const Film = (props) => {
-    const film = props.film
+    const { id } = useParams();
+
+    const film = films.find(film => film.id === parseInt(id));
+
+    if (!film) {
+        return <p>Film not found</p>;
+    }
 
     return (
         <>
             <h1 id="film"></h1>
             <section id="generalInfo">
-                <p>Released: </p>
-                <p>Director: </p>
-                <p>Episode: </p>
+                <p>Released: {film.release_date}</p>
+                <p>Director: {film.director}</p>
+                <p>Episode: {film.episode_id}</p>
             </section>
             <section id="characters">
                 <h2>Characters</h2>

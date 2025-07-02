@@ -1,14 +1,11 @@
 import { useParams } from 'react-router-dom';
-import characters from '../assets/characters.json' // Ensure this path is correct
+import characters from '../assets/characters.json' 
 
 const Character = () => {
-    // Use useParams to get the id from the URL
     const { id } = useParams();
 
-    // Find the character with the matching id
     const character = characters.find(char => char.id === parseInt(id));
 
-    // Check if character exists
     if (!character) {
         return <p>Character not found</p>;
     }
