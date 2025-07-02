@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link, useNavigate, useParams } from "react-router-dom";
 
 const Character = () => {
     const { id } = useParams();
@@ -11,6 +11,9 @@ const Character = () => {
     const navigateFilm = (film) => {
         navigate(`/film/${film.id}`)
     }
+    const navigatePlanet = (planet) => {
+        navigate(`/planet/${planet.id}`)
+    }
     const fetchFilms = async () => {
         fetch(`http://localhost:3000/api/characters/${id}/films`)
             .then((res) => {
@@ -21,16 +24,26 @@ const Character = () => {
             })
             .then((data) => {
                 setFilms(data);
-                console.log(data);
-                console.log(films);
             })
             .catch((error) => {
                 console.error('Error fetching films:', error);
             });
     }
 
-    const fetchHomeworld = () => {
-        
+    const fetchHomeworld = async () => {
+        fetch(`http://localhost:3000/api/characters/${id}/planets`)
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error('Data could not be fetched!');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                setHomeworld(data);
+            })
+            .catch((error) => {
+                console.error('Error fetching homeworld:', error);
+            });
     }
 
     const fetchCharacter = async () => {
@@ -51,6 +64,7 @@ const Character = () => {
 
     useEffect(() => {
         fetchCharacter();
+        fetchHomeworld();
         fetchFilms();
     }, []);
 
@@ -65,7 +79,7 @@ const Character = () => {
             </section>
             <section id="planets">
                 <h2>Homeworld</h2>
-                <p>{character.homeworld}</p>
+                <button onClick={() => navigatePlanet(homeworld)} className="btn btn-primary">{homeworld.name}</button>
             </section>
             <section id="films">
                 <h2>Films appeared in</h2>
