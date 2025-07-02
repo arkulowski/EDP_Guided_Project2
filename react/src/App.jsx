@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
 import Home from './components/Home';
-import Character from './components/Characters';
-import Film from './components/Films';
-import Planet from './components/Planets';
+import Character from './components/Characters'; // Ensure this matches the file name
 import characters from './assets/characters.json';
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 import './App.css';
 
 function App() {
+  const [character, setCharacter] = useState();
 
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home characters={characters}  />} />
-          <Route path="/character/:id" element={<Character />} />
-          <Route path="/film/:id" element={<Film />} />
-          <Route path="/planet/:id" element={<Planet />} />
-        </Routes>
-      </Router>
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home characters={characters} setCharacter={setCharacter} />} />
+        <Route path="/character/:id" element={<Character character={character} />} />
+      </Routes>
+    </Router>
   );
 }
 
