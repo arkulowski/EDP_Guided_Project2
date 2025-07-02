@@ -2,6 +2,7 @@ import express from 'express';
 import { MongoClient, ObjectId } from 'mongodb';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import * as path from 'path';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ let db;
 
 async function startServer() {
   try {
+    app.use(express.static('public'))
+
     const client = new MongoClient(mongoUrl, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -122,57 +125,57 @@ async function startServer() {
     app.get('/api/planets/:id/films', async (req, res) => {
       try {
         const planetId = parseInt(req.params.id);
-    
+
         const planetFilmData = await db.collection(process.env.MONGO_DB_COLLECTION_FILMS_PLANETS)
           .find({ planet_id: planetId })
           .toArray();
-    
+
         const filmIds = planetFilmData.map(pf => pf.film_id);
-    
+
         const films = await db.collection(process.env.MONGO_DB_COLLECTION_FILMS)
           .find({ id: { $in: filmIds } })
           .toArray();
-    
+
         res.json(films);
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while fetching films for the planet.' });
       }
-    });    
+    });
 
     app.get('/api/planets/:id/characters', async (req, res) => {
       try {
         const planetId = parseInt(req.params.id);
-        
+
         const characters = await db.collection(process.env.MONGO_DB_COLLECTION_CHARACTERS)
           .find({ homeworld: planetId })
           .toArray();
-    
+
         res.json(characters);
       } catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while fetching characters for the planet.' });
       }
     });
-    
+
     app.get('/api/characters/:id/planets', async (req, res) => {
       try {
         const characterId = parseInt(req.params.id);
-    
+
         const character = await db.collection(process.env.MONGO_DB_COLLECTION_CHARACTERS)
           .findOne({ id: characterId });
-    
+
         if (!character) {
           return res.status(404).json({ error: 'Character not found.' });
         }
-    
+
         const homeworld = await db.collection(process.env.MONGO_DB_COLLECTION_PLANETS)
           .findOne({ id: character.homeworld });
-    
+
         if (!homeworld) {
           return res.status(404).json({ error: 'Homeworld not found.' });
         }
-    
+
         res.json(homeworld);
       } catch (error) {
         console.error(error);
@@ -180,7 +183,6 @@ async function startServer() {
       }
     });
     ;
-    
 
 
     app.listen(port, () => {
