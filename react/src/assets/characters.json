@@ -1,0 +1,28 @@
+[
+    {
+        "id": 1,
+        "name": "Luke Skywalker",
+        "gender": "male",
+        "skin_color": "fair",
+        "hair_color": "blond",
+        "height": "172",
+        "eye_color": "blue",
+        "mass": "77",
+        "homeworld": 1,
+        "birth_year": "19BBY",
+        "species_id": 1
+    },
+    {
+        "id": 2,
+        "name": "C-3PO",
+        "gender": "n/a",
+        "skin_color": "gold",
+        "hair_color": "n/a",
+        "height": "167",
+        "eye_color": "yellow",
+        "mass": "75",
+        "homeworld": 1,
+        "birth_year": "112BBY",
+        "species_id": 2
+    }
+]
