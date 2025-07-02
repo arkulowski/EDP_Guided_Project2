@@ -42,17 +42,17 @@ async function startServer() {
     });
 
     app.get('/api/characters/:id', async (req, res) => {
-      const data = await db.collection(process.env.MONGO_DB_COLLECTION_CHARACTERS).findOne({ _id: new ObjectId(req.params.id) });
+      const data = await db.collection(process.env.MONGO_DB_COLLECTION_CHARACTERS).findOne({ id: parseInt(req.params.id) });
       res.json(data);
     });
 
     app.get('/api/films/:id', async (req, res) => {
-      const data = await db.collection(process.env.MONGO_DB_COLLECTION_FILMS).findOne({ _id: new ObjectId(req.params.id) });
+      const data = await db.collection(process.env.MONGO_DB_COLLECTION_FILMS).findOne({ id: parseInt(req.params.id) });
       res.json(data);
     });
 
     app.get('/api/planets/:id', async (req, res) => {
-      const data = await db.collection(process.env.MONGO_DB_COLLECTION_PLANETS).findOne({ _id: new ObjectId(req.params.id) });
+      const data = await db.collection(process.env.MONGO_DB_COLLECTION_PLANETS).findOne({ id: parseInt(req.params.id) });
       res.json(data);
     });
 
@@ -143,15 +143,9 @@ async function startServer() {
     app.get('/api/planets/:id/characters', async (req, res) => {
       try {
         const planetId = parseInt(req.params.id);
-    
-        const planetCharacterData = await db.collection(process.env.MONGO_DB_COLLECTION_PLANETS_CHARACTERS)
-          .find({ planet_id: planetId })
-          .toArray();
-    
-        const characterIds = planetCharacterData.map(pc => pc.character_id);
-    
+        
         const characters = await db.collection(process.env.MONGO_DB_COLLECTION_CHARACTERS)
-          .find({ id: { $in: characterIds } })
+          .find({ homeworld: planetId })
           .toArray();
     
         res.json(characters);
@@ -160,6 +154,7 @@ async function startServer() {
         res.status(500).json({ error: 'An error occurred while fetching characters for the planet.' });
       }
     });
+    
     
 
 
