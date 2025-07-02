@@ -13,7 +13,7 @@ const Planet = (props) => {
         navigate(`/character/${character.id}`)
     }
     const navigateFilm = (film) => {
-        navigate(`/planet/${film.id}`)
+        navigate(`/film/${film.id}`)
     }
     const fetchFilms = async () => {
         fetch(`http://localhost:3000/api/planets/${id}/films`)
